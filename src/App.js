@@ -1,25 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom'
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import ProjectListPage from './pages/ProjectListPage';
+import ProjectPage from './pages/ProjectPage';
+import NotFoundPage from './pages/NotFoundPage';
+import NavBar from './NavBar';
+
+
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <NavBar></NavBar>
+        <div id="page-body">
+          <Switch>
+            <Route path="/" component={HomePage} exact />           {/* exact makes sure it only appears when its JUST slash */}
+            <Route path="/about" component={AboutPage}></Route>
+            <Route path="/project-list" component={ProjectListPage}></Route>
+            <Route path="/project/:name" component={ProjectPage}></Route>   {/* :name allows us to use diffferent URL links to the page */}
+            <Route component={NotFoundPage}></Route>
+          </Switch>
+        </div>
+      </div>
+    </Router>
+
   );
 }
 
